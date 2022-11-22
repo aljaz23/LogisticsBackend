@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logistics 4.0</title>
+  <link
+          rel="stylesheet"
+          type="text/css"
+          href="/webjars/bootstrap/css/bootstrap.min.css"
+  />
+</head>
+<body>
+<div class="container text-center m-2">
+  <form th:action="@{/logout}" method="post">
+    <p1>Welcome <b>[[${#request.userPrincipal.principal.Username}]]</b></p1>
+    <br />
+    <input class="m-2" type="submit" value="Sign Out" />
+    <h1 class="m-5">Logistics 4.0</h1>
+  </form>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link text-dark" href="/logistics_home">Home</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_articles">Articles</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_warehouse#">Warehouse</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_user_list">Users</a>
+    </div>
+  </div>
+</nav>
+<div class="container text-center m-2">
+  <h2>Adding Warehouse</h2>
+  <form
+          th:action="@{/logistics_add_warehouse}"
+          method="post"
+          style="max-width: 600px; margin: 0 auto; margin-top: 20px"
+          th:object="${warehouse}">
+    <div class="m-4">
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Storage Rack</label>
+        <div class="col-8">
+          <input
+                  id="storageRack"
+                  type="number"
+                  class="form-control"
+                  th:field="*{storageRack}"
+                  required
+          />
+        </div>
+      </div>
+        <div class="form-group row m-3">
+          <label class="col-form-label col-4">Volume (m3)</label>
+          <div class="col-8">
+            <input
+                    id="volume"
+                    type="number"
+                    class="form-control"
+                    th:field="*{volume}"
+                    required
+            />
+          </div>
+        </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Max Weight (kg)</label>
+        <div class="col-8">
+          <input
+                  id=" maxWeight"
+                  type="number"
+                  class="form-control"
+                  th:field="*{maxWeight}"
+                  required
+          />
+        </div>
+      </div>
+        <button
+                  id="button"
+                  class="btn btn-primary m-3">Add Warehouse</button>
+        </div>
+   </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logistics 4.0</title>
+  <link
+          rel="stylesheet"
+          type="text/css"
+          href="/webjars/bootstrap/css/bootstrap.min.css"
+  />
+</head>
+<body>
+<div class="container text-center m-2">
+  <form th:action="@{/logout}" method="post">
+    <p1>Welcome <b>[[${#request.userPrincipal.principal.Username}]]</b></p1>
+    <br />
+    <input class="m-2" type="submit" value="Sign Out" />
+    <h1 class="m-5">Logistics 4.0</h1>
+  </form>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link text-dark" href="/logistics_home">Home</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_articles">Articles</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_warehouse#">Warehouse</a>
+      <a class="nav-item nav-link text-dark" href="/logistics_user_list">Users</a>
+    </div>
+  </div>
+</nav>
+<div class="container text-center m-2">
+  <h2 class="m-2">Add Article</h2>
+  <form
+          th:action="@{/logistics_add_article}"
+          method="post"
+          style="max-width: 800px; margin: 0 auto; margin-top: 20px"
+          th:object="${article}"
+  >
+    <div class="m-4">
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Article Name</label>
+        <div class="col-8">
+          <input
+                  id="articleName"
+                  type="text"
+                  class="form-control"
+                  th:field="*{articleName}"
+                  required
+          />
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Supplier</label>
+        <div class="col-8">
+          <input
+                  id="supplier"
+                  type="text"
+                  class="form-control"
+                  th:field="*{supplier}"
+                  required
+          />
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Weight (kg)</label>
+        <div class="col-8">
+          <input
+                  id="weight"
+                  type="number"
+                  class="form-control"
+                  th:field="*{weight}"
+                  required
+          />
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Volume (m3)</label>
+        <div class="col-8">
+          <input
+                  id="volume"
+                  type="number"
+                  class="form-control"
+                  th:field="*{volume}"
+                  required
+          />
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Purchase Price (€)</label>
+        <div class="col-8">
+          <input
+                  id="purchasePrice"
+                  type="number"
+                  class="form-control"
+                  th:field="*{purchasePrice}"
+                  required
+          />
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-form-label col-4">Warehouse Storage Rack</label>
+        <div class="col-8">
+          <select name="warehouse" id="warehouse" class="form-control">
+            <option
+                    th:each="warehouse : ${warehouseList}"
+                    th:value="${warehouse.storageRack}"
+                    th:text="|Storage Rack: ${warehouse.storageRack} Volume: ${warehouse.volume} Max Weight: ${warehouse.maxWeight}|"
+            ></option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button id="button" class="btn btn-primary m-3">Add Article</button>
+      </div>
+      <p1 id="msg"></p1>
+    </div>
+  </form>
+</div>
+<script>
+  function showMessage(){
+     document.getElementById("msg").innerText = "Article successfully added!";
+ }
+</script>
+</body>
+</html>
